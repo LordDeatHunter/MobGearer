@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "mob_gearer",
+  "version": "${version}",
+
+  "name": "Mob Gearer",
+  "description": "Make mobs spawn with gear!",
+  "authors": [
+    "LordDeatHunter"
+  ],
+  "contact": {
+    "homepage": "",
+    "sources": "https://github.com/LordDeatHunter/MobGearer"
+  },
+
+  "license": "MIT",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "wraith.mob_gearer.MobGearer"
+    ]
+  },
+  "mixins": [
+    "mob_gearer.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.7.4",
+    "fabric": "*",
+    "minecraft": "1.16.x"
+  }
+}
