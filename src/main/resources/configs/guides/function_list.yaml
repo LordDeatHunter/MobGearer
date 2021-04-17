@@ -1,0 +1,30 @@
+range:
+  variables:
+    min: any number
+    max: any number
+    return_type: (optional) string, DECIMAL, INTEGER, FLOAT or WHOLE_NUMBER
+  description:
+    Picks a random decimal number between MIN and MAX. If return_type is specified and set to DECIMAL or INTEGER, it returns an int instead.
+
+incremental_range:
+  variables:
+    min: any number
+    max: any number
+    increment_amount: whole number
+    return_type: (optional) string, DECIMAL, INTEGER, FLOAT or WHOLE_NUMBER
+  description:
+    Picks a random decimal number between MIN and MAX, in increments of INCREMENT_AMOUNT. If return_type is specified and set to DECIMAL or INTEGER, it returns an int instead.
+
+random_chance:
+  variables:
+    chance: decimal number between 0 and 1
+  description:
+    PERCENT chance of returning true
+
+get_item:
+  variables:
+    item: string
+    amount: (optional) whole number
+  description:
+    Returns 1 of the specified item. If AMOUNT is set, it will return that amount of the item instead. The item name must be in the form 'mod_name:item_name' or just 'item_name' if it's a custom item
+

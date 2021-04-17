@@ -1,0 +1,37 @@
+{
+
+  "custom_mobs": {
+
+    "mob_group": "The type of mob this custom mob should replace on spawn.",
+
+    "custom_name": "The name (if any) the custom mob should spawn with.",
+
+    "display_custom_name": "Whether or not to display the mob's custom name.",
+
+    "health_range": {
+      "min": "Starting value",
+      "max": "Max possible value",
+      "increment_amount": "Amount to TRY to increase the health by",
+      "increment_chance": "The chance that it continues increasing, after finishing an increment",
+      "total": "Sets the total health value",
+
+      "Further Explanation": "Min and Max alone picks a random number between them. Increments increases the health in steps. Total overrides the health to the given value."
+    },
+
+    "equipment_selector": "random -> selects ROLL (value specified below) amount of equipments. from_start -> goes through all the equipments one by one.",
+
+    "equipment_rolls": "The number of random equipments to choose, if the selector is RANDOM",
+
+    "possible_equipments": {
+      "weight": "The higher he number, the higher the chance it has of getting picked in relation to other entries. For example, having a weight of 10 or 1000 is the same, if the the weight of the other entries is below 10.",
+      "equipment": "bandit_equipment",
+      "conditions": [
+        {
+          "condition_name": "Refer to the list of conditions above."
+        }
+      ]
+    }
+
+
+  }
+}

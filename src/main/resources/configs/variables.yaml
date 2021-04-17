@@ -1,0 +1,4 @@
+per_player_variables:
+  mob_kills: {}
+  money: 0
+  discovered_regions: create_set(values:[])

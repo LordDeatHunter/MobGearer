@@ -1,0 +1,1 @@
+bandit_camp: create_region(name:"Bandit Camp", min_x:250, min_y:60, min_z:250, max_x:500, max_y:256, max_z:500, dimension:"minecraft:overworld")

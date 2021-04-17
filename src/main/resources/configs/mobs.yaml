@@ -1,0 +1,89 @@
+hostile:
+  - minecraft:blaze
+  - minecraft:creeper
+  - minecraft:drowned
+  - minecraft:elder_guardian
+  - minecraft:endermite
+  - minecraft:evoker
+  - minecraft:ghast
+  - minecraft:guardian
+  - minecraft:husk
+  - minecraft:illager
+  - minecraft:magma_cube
+  - minecraft:phantom
+  - minecraft:pillager
+  - minecraft:ravager
+  - minecraft:shulker
+  - minecraft:silverfish
+  - minecraft:skeleton
+  - minecraft:slime
+  - minecraft:stray
+  - minecraft:vex
+  - minecraft:vindicator
+  - minecraft:witch
+  - minecraft:wither_skeleton
+  - minecraft:zombie
+  - minecraft:zombie_villager
+
+fish:
+  - minecraft:cod
+  - minecraft:salmon
+  - minecraft:tropical_fish
+  - minecraft:pufferfish
+
+skeletons:
+  - minecraft:skeleton
+  - minecraft:wither_skeleton
+
+passive:
+  - minecraft:bat
+  - minecraft:cat
+  - minecraft:chicken
+  - minecraft:cow
+  - minecraft:donkey
+  - minecraft:cod
+  - minecraft:fox
+  - minecraft:mooshroom
+  - minecraft:mule
+  - minecraft:ocelot
+  - minecraft:parrot
+  - minecraft:pig
+  - minecraft:rabbit
+  - minecraft:salmon
+  - minecraft:sheep
+  - minecraft:skeleton_horse
+  - minecraft:snow_golem
+  - minecraft:squid
+  - minecraft:strider
+  - minecraft:turtle
+  - minecraft:tropical_fish
+  - minecraft:villager
+  - minecraft:wandering_trader
+
+spiders:
+  - minecraft:cave_spider
+  - minecraft:spider
+
+neutral:
+  - minecraft:bee
+  - spiders
+  - minecraft:dolphin
+  - minecraft:enderman
+  - minecraft:iron_golem
+  - minecraft:llama
+  - minecraft:piglin
+  - minecraft:piglin_brute
+  - minecraft:panda
+  - minecraft:pufferfish
+  - minecraft:wolf
+  - minecraft:zombified_piglin
+
+bosses:
+  - minecraft:wither
+  - minecraft:ender_dragon
+
+all:
+  - hostile
+  - passive
+  - neutral
+  - bosses

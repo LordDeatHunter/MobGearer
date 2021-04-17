@@ -1,0 +1,35 @@
+item:
+  roll_type: attempt
+  rolls: 1
+  entries:
+    - weight: 3
+      condition: none
+      remove_from_pool_if_chosen: true
+      contents:
+        value: get_item(item:"minecraft:stone_sword")
+    - weight: 1
+      condition: none
+      remove_from_pool_if_chosen: true
+      contents:
+        value: get_item(item:"minecraft:iron_sword")
+
+name: §3Bandit Dagger
+lore:
+  - §9Your average bandit dagger
+enchantments:
+  roll_type: attempt
+  rolls: 1
+  chance_for_empty_roll: 0.4
+  entries:
+    - weight: 1
+      condition: none
+      remove_from_pool_if_chosen: true
+      contents:
+        roll_type: attempt
+        rolls: 1
+        entries:
+          - weight: 1
+            remove_from_pool_if_chosen: true
+            condition: none
+            contents:
+              value: get_enchantment(enchantment:"minecraft:sharpness", level:1)

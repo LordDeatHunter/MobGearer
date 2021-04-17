@@ -1,0 +1,53 @@
+item: get_item(item:"minecraft:leather_boots")
+name: §3Bandit Shoes
+lore:
+  - §9Your average bandit shoes
+enchantments:
+  roll_type: attempt
+  rolls: range(min:1, max:2, return_type:"integer")
+  chance_for_empty_roll: 0.4
+  entries:
+    - weight: 10
+      condition: none
+      remove_from_pool_if_chosen: true
+      contents:
+        roll_type: attempt
+        rolls: 1
+        entries:
+          - weight: 7
+            remove_from_pool_if_chosen: true
+            condition: none
+            contents:
+              value: get_enchantment(enchantment:"minecraft:protection", level:1)
+          - weight: 3
+            remove_from_pool_if_chosen: true
+            condition: none
+            contents:
+              value: get_enchantment(enchantment:"minecraft:protection", level:2)
+          - weight: 1
+            remove_from_pool_if_chosen: true
+            condition: none
+            contents:
+              value: get_enchantment(enchantment:"minecraft:protection", level:3)
+    - weight: 8
+      condition: none
+      remove_from_pool_if_chosen: true
+      contents:
+        roll_type: attempt
+        rolls: 1
+        entries:
+          - weight: 7
+            remove_from_pool_if_chosen: true
+            condition: none
+            contents:
+              value: get_enchantment(enchantment:"minecraft:projectile_protection", level:1)
+          - weight: 3
+            remove_from_pool_if_chosen: true
+            condition: none
+            contents:
+              value: get_enchantment(enchantment:"minecraft:projectile_protection", level:2)
+          - weight: 1
+            remove_from_pool_if_chosen: true
+            condition: none
+            contents:
+              value: get_enchantment(enchantment:"minecraft:projectile_protection", level:3)

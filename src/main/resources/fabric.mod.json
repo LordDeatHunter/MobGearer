@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "id": "mob_gearer",
+  "id": "rpgify",
   "version": "${version}",
 
-  "name": "Mob Gearer",
-  "description": "Make mobs spawn with gear!",
+  "name": "RPGify",
+  "description": "Define your own custom gear!",
   "authors": [
     "LordDeatHunter"
   ],
   "contact": {
     "homepage": "",
-    "sources": "https://github.com/LordDeatHunter/MobGearer"
+    "sources": "https://github.com/LordDeatHunter/RPGify"
   },
 
   "license": "MIT",
@@ -18,11 +18,11 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "wraith.mob_gearer.MobGearer"
+      "wraith.rpgify.RPGify"
     ]
   },
   "mixins": [
-    "mob_gearer.mixins.json"
+    "rpgify.mixins.json"
   ],
 
   "depends": {
