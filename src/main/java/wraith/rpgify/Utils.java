@@ -40,6 +40,12 @@ public class Utils {
 
     public static void saveFilesFromJar(String dir, String outputDir, boolean overwrite) {
         JarFile jar = null;
+        if (dir.endsWith("/")) {
+            dir = dir.substring(0, dir.length() - 1);
+        }
+        if (outputDir.endsWith("/")) {
+            outputDir = outputDir.substring(0, dir.length() - 1);
+        }
         try {
             jar = new JarFile(Utils.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
         } catch (IOException | URISyntaxException e) {
@@ -55,41 +61,19 @@ public class Utils {
             Enumeration<JarEntry> entries = jar.entries();
             while(entries.hasMoreElements()) {
                 JarEntry entry = entries.nextElement();
-                if ((entry.getName().endsWith(".png") || entry.getName().endsWith(".mcmeta")) && !dir.contains("textures")) {
-                    continue;
-                }
-                if (!entry.getName().startsWith(dir) || (!entry.getName().endsWith(".yaml") && !entry.getName().endsWith(".png") && !entry.getName().endsWith(".mcmeta"))) {
+                long entrySeparatorCount = entry.getName().chars().filter(c -> c == '/').count();
+                long dirSeparatorCount = dir.chars().filter(c -> c == '/').count();
+                if (entrySeparatorCount - 1 != dirSeparatorCount || !entry.getName().startsWith(dir) || !entry.getName().endsWith(".yaml")) {
                     continue;
                 }
                 String[] segments = entry.getName().split("/");
                 String filename = segments[segments.length - 1];
-                if (entry.isDirectory()) {
-                    continue;
-                }
                 InputStream is = Utils.class.getResourceAsStream("/" + entry.getName());
                 String path = "config/" + RPGify.MOD_ID + "/" + outputDir + ("".equals(outputDir) ? "" : File.separator) + filename;
-                if (filename.endsWith(".png")) {
-                    if (Files.exists(new File(path).toPath()) && overwrite) {
-                        try {
-                            Files.delete(new File(path).toPath());
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    if (!Files.exists(new File(path).toPath())) {
-                        try {
-                            new File(path).getParentFile().mkdirs();
-                            Files.copy(is, new File(path).toPath());
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                } else {
-                    try {
-                        inputStreamToFile(is, new File(path), overwrite);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                try {
+                    inputStreamToFile(is, new File(path), overwrite);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         } else {
@@ -102,32 +86,11 @@ public class Utils {
                 String[] segments = file.getName().split("/");
                 String filename = segments[segments.length - 1];
                 String path = "config/" + RPGify.MOD_ID + "/" + outputDir + ("".equals(outputDir) ? "" : File.separator) + filename;
-                if (filename.endsWith(".png")) {
-                    if (Files.exists(new File(path).toPath()) && overwrite) {
-                        try {
-                            Files.delete(new File(path).toPath());
-                        } catch (IOException e) {
-                            RPGify.LOGGER.warn("ERROR OCCURRED WHILE DELETING OLD TEXTURES FOR " + filename);
-                            e.printStackTrace();
-                        }
-                    }
-                    if (!Files.exists(new File(path).toPath())) {
-                        try {
-                            RPGify.LOGGER.info("Regenerating " + filename);
-                            new File(path).getParentFile().mkdirs();
-                            Files.copy(file.toPath(), new File(path).toPath());
-                        } catch (IOException e) {
-                            RPGify.LOGGER.warn("ERROR OCCURRED WHILE REGENERATING " + filename + " TEXTURE");
-                            e.printStackTrace();
-                        }
-                    }
-                } else {
-                    try {
-                        Config.createFile(path, FileUtils.readFileToString(file, StandardCharsets.UTF_8), overwrite);
-                    } catch (IOException e) {
-                        RPGify.LOGGER.warn("ERROR OCCURRED WHILE REGENERATING " + filename + " TEXTURE");
-                        e.printStackTrace();
-                    }
+                try {
+                    Config.createFile(path, FileUtils.readFileToString(file, StandardCharsets.UTF_8), overwrite);
+                } catch (IOException e) {
+                    RPGify.LOGGER.warn("ERROR OCCURRED WHILE REGENERATING " + filename + " TEXTURE");
+                    e.printStackTrace();
                 }
             }
         }

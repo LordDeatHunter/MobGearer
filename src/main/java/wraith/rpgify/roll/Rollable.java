@@ -39,7 +39,7 @@ public class Rollable {
     public static Rollable fromYaml(HashMap<String, Object> map) {
         boolean remove = (boolean) map.getOrDefault("remove_from_pool_if_chosen", false);
         AbstractVariable weight = AbstractVariable.of(String.valueOf(map.getOrDefault("weight", "0.0")));
-        ConditionVariable condition = new ConditionVariable(String.valueOf(map.getOrDefault("condition", "none")));
+        ConditionVariable condition = new ConditionVariable(String.valueOf(map.getOrDefault("condition", "none")), false);
 
         HashMap<String, Object> values = (HashMap<String, Object>) map.get("contents");
 

@@ -31,6 +31,8 @@ public class SetVariable extends ImplementedVariable {
             }
         } else if (value instanceof ArrayList) {
             this.value = new HashSet<>((ArrayList<AbstractVariable>) value);
+        } else if (value instanceof HashSet) {
+            this.value = value;
         }
     }
 

@@ -2,6 +2,7 @@ package wraith.rpgify.function;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
+import wraith.rpgify.entity.CustomEntity;
 import wraith.rpgify.variable.AbstractVariable;
 import wraith.rpgify.variable.Region;
 
@@ -16,22 +17,18 @@ public class IsInRegionFunction extends Function {
         }});
     }};
     private static HashMap<String, HashSet<String>> optionalParameters = new HashMap<>();
-    private Entity entity = null;
 
     public IsInRegionFunction(String functionName, HashMap<String, AbstractVariable> parameters) {
         super(functionName, parameters);
     }
 
-    public void setEntity(Entity entity) {
-        this.entity = entity;
-    }
-
     @Override
     public Object getValue() {
-        if (entity == null) {
+        if (!this.variables.containsKey("entity")) {
             return false;
         }
-        BlockPos pos = this.entity.getBlockPos();
+        Entity entity = (Entity) this.variables.get("entity");
+        BlockPos pos = entity.getBlockPos();
         int x = pos.getX();
         int y = pos.getY();
         int z = pos.getZ();

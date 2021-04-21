@@ -1,31 +1,21 @@
-mob_group: pick_random(from:mobs.skeletons)
-custom_name: Skeleton Bandit Leader
+mob_type: pick_random(from:mobs.skeletons)
+custom_name: "Skeleton Bandit Leader"
 display_custom_name: true
 
 max_health: incremental_range(min:35, max:50, increment_amount:5)
-health: this.max_health
 
 equipment:
   roll_type: attempt
   rolls: 1
   entries:
-    - weight: 9
-      condition: none
-      contents:
-        helmet: equip(equip_chance:0.8, drop_chance:0.3, item:bandit_hat(amount:1))
-        chestplate: equip(equip_chance:1, drop_chance:0.3, item:bandit_shirt(amount:1)
-        leggings: equip(equip_chance:1, drop_chance:0.3, item:bandit_pants(amount:1)
-        boots: equip(equip_chance:1, drop_chance:0.3, item:bandit_boots(amount:1)
-        held_item: equip(equip_chance:1, drop_chance:0.2, item:bandit_dagger(amount:1)
-        off_hand: none
     - weight: 3
       condition: none
       contents:
         helmet: equip(equip_chance:0.8, drop_chance:0.3, item:get_item(item:"bandit_hat", amount:1))
-        chestplate: equip(equip_chance:1, drop_chance:0.3, item:get_item(item:"bandit_shirt", amount:1)
-        leggings: equip(equip_chance:1, drop_chance:0.3, item:get_item(item:"bandit_pants", amount:1)
-        boots: equip(equip_chance:1, drop_chance:0.3, item:get_item(item:"bandit_boots", amount:1)
-        held_item: equip(equip_chance:1, drop_chance:0.2, item:get_item(item:"bandit_dagger", amount:1)
+        chestplate: equip(equip_chance:1, drop_chance:0.3, item:get_item(item:"bandit_shirt", amount:1))
+        leggings: equip(equip_chance:1, drop_chance:0.3, item:get_item(item:"bandit_pants", amount:1))
+        boots: equip(equip_chance:1, drop_chance:0.3, item:get_item(item:"bandit_boots", amount:1))
+        held_item: equip(equip_chance:1, drop_chance:0.2, item:get_item(item:"bandit_dagger", amount:1))
         off_hand: none
 
 drops:
@@ -50,7 +40,6 @@ drops:
 
 drop_vanilla_drops: true
 
-spawn_event: player_enters_region(region:regions.bandit_camp)
-
-spawn_condition: is_in_region(region:regions.bandit_camp) and not mob_is_nearby(radius:200, mob:"skeleton_bandit_leader")
-
+spawn_event: on_player_enter_region(region:regions.bandit_camp)
+spawn_position: get_random_safe_position_in_region(region:regions.bandit_camp)
+spawn_condition: is_in_region(region:regions.bandit_camp) and not mob_is_nearby(radius:15, mob_type:this)

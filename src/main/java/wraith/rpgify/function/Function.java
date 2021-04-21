@@ -18,51 +18,89 @@ public abstract class Function extends AbstractVariable {
         this.parameters = parameters;
     }
 
-    public static Function factory(String name, HashMap<String, AbstractVariable> parameters) {
+    public static Function factory(String name, HashMap<String, AbstractVariable> parameters, boolean override) {
         switch(name) {
             case "incremental_range":
-                if (hasValidParameters(parameters, IncrementalRangeFunction.mandatoryParameters)) {
+                if (override || hasValidParameters(parameters, IncrementalRangeFunction.mandatoryParameters)) {
                     return new IncrementalRangeFunction(name, parameters);
                 }
                 break;
             case "range":
-                if (hasValidParameters(parameters, RangeFunction.mandatoryParameters)) {
+                if (override || hasValidParameters(parameters, RangeFunction.mandatoryParameters)) {
                     return new RangeFunction(name, parameters);
                 }
                 break;
             case "random_chance":
-                if (hasValidParameters(parameters, RandomChanceFunction.mandatoryParameters)) {
+                if (override || hasValidParameters(parameters, RandomChanceFunction.mandatoryParameters)) {
                     return new RandomChanceFunction(name, parameters);
                 }
                 break;
             case "get_item":
-                if (hasValidParameters(parameters, GetItemFunction.mandatoryParameters)) {
+                if (override || hasValidParameters(parameters, GetItemFunction.mandatoryParameters)) {
                     return new GetItemFunction(name, parameters);
                 }
                 break;
             case "get_enchantment":
-                if (hasValidParameters(parameters, GetEnchantmentFunction.mandatoryParameters)) {
+                if (override || hasValidParameters(parameters, GetEnchantmentFunction.mandatoryParameters)) {
                     return new GetEnchantmentFunction(name, parameters);
                 }
                 break;
             case "has_enchantment":
-                if (hasValidParameters(parameters, HasEnchantmentFunction.mandatoryParameters)) {
+                if (override || hasValidParameters(parameters, HasEnchantmentFunction.mandatoryParameters)) {
                     return new HasEnchantmentFunction(name, parameters);
                 }
                 break;
             case "create_region":
-                if (hasValidParameters(parameters, CreateRegionFunction.mandatoryParameters)) {
+                if (override || hasValidParameters(parameters, CreateRegionFunction.mandatoryParameters)) {
                     return new CreateRegionFunction(name, parameters);
                 }
                 break;
             case "is_in_region":
-                if (hasValidParameters(parameters, IsInRegionFunction.mandatoryParameters)) {
+                if (override || hasValidParameters(parameters, IsInRegionFunction.mandatoryParameters)) {
                     return new IsInRegionFunction(name, parameters);
                 }
                 break;
             case "pick_random":
-                if (hasValidParameters(parameters, PickRandomFunction.mandatoryParameters)) {
+                if (override || hasValidParameters(parameters, PickRandomFunction.mandatoryParameters)) {
                     return new PickRandomFunction(name, parameters);
+                }
+                break;
+            case "get_random_position_in_region":
+                if (override || hasValidParameters(parameters, GetRandomPositionInRegionFunction.mandatoryParameters)) {
+                    return new GetRandomPositionInRegionFunction(name, parameters);
+                }
+                break;
+            case "get_random_safe_position_in_region":
+                parameters.put("safe", AbstractVariable.of("true"));
+                if (override || hasValidParameters(parameters, GetRandomPositionInRegionFunction.mandatoryParameters)) {
+                    return new GetRandomPositionInRegionFunction(name, parameters);
+                }
+                break;
+            case "create_block_pos":
+                if (override || hasValidParameters(parameters, CreateBlockPosFunction.mandatoryParameters)) {
+                    return new CreateBlockPosFunction(name, parameters);
+                }
+                break;
+            case "mob_is_nearby":
+                if (override || hasValidParameters(parameters, MobIsNearbyFunction.mandatoryParameters)) {
+                    return new MobIsNearbyFunction(name, parameters);
+                }
+                break;
+            case "on_player_enter_region":
+                parameters.put("enter_or_leave", AbstractVariable.of("\"enter\""));
+                if (override || hasValidParameters(parameters, OnPlayerEnterRegionFunction.mandatoryParameters)) {
+                    return new OnPlayerEnterRegionFunction(name, parameters);
+                }
+                break;
+            case "on_player_leave_region":
+                parameters.put("enter_or_leave", AbstractVariable.of("\"leave\""));
+                if (override || hasValidParameters(parameters, OnPlayerEnterRegionFunction.mandatoryParameters)) {
+                    return new OnPlayerEnterRegionFunction(name, parameters);
+                }
+                break;
+            case "spawn_entity":
+                if (override || hasValidParameters(parameters, SpawnEntityFunction.mandatoryParameters)) {
+                    return new SpawnEntityFunction(name, parameters);
                 }
                 break;
         }
@@ -71,6 +109,9 @@ public abstract class Function extends AbstractVariable {
 
     protected static boolean hasValidParameters(HashMap<String, AbstractVariable> parameters, HashMap<String, HashSet<String>> mandatoryParameters) {
         for (Map.Entry<String, HashSet<String>> param : mandatoryParameters.entrySet()) {
+            if (parameters.get(param.getKey()) == null) {
+                System.out.println("pisspack");
+            }
             if(!parameters.containsKey(param.getKey()) || !param.getValue().contains(parameters.get(param.getKey()).getType())) {
                 return false;
             }

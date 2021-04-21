@@ -8,8 +8,8 @@ import java.util.HashSet;
 
 public class CreateMap extends Function {
 
-    private static HashMap<String, HashSet<String>> mandatoryParameters = new HashMap<>();
-    private static HashMap<String, HashSet<String>> optionalParameters = new HashMap<String, HashSet<String>>(){{
+    public static HashMap<String, HashSet<String>> mandatoryParameters = new HashMap<>();
+    public static HashMap<String, HashSet<String>> optionalParameters = new HashMap<String, HashSet<String>>(){{
         put("values", new HashSet<String>(){{
             add("hashmap");
         }});

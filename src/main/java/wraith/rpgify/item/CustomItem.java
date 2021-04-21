@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class CustomItem {
+public class CustomItem extends AbstractVariable {
 
     private AbstractVariable stack;
     private String name;
@@ -24,6 +24,7 @@ public class CustomItem {
     private RollPicker enchantments;
 
     public CustomItem(AbstractVariable stack, String name, List<String> lore, RollPicker enchants) {
+        super(null, "itemstack");
         this.stack = stack;
         this.name = name;
         this.lore = lore;
@@ -72,6 +73,11 @@ public class CustomItem {
         EnchantmentHelper.set(enchantMap, stack);
 
         return stack;
+    }
+
+    @Override
+    public Object getValue() {
+        return getStack();
     }
 
 }

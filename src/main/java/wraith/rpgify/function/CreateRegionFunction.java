@@ -40,13 +40,14 @@ public class CreateRegionFunction extends Function {
     @Override
     public Object getValue() {
         String name = String.valueOf(parameters.get("name").getValue());
+        String dimension = String.valueOf(parameters.get("dimension").getValue());
         int minX = Integer.parseInt(String.valueOf(parameters.get("min_x").getValue()));
         int minY = Integer.parseInt(String.valueOf(parameters.get("min_y").getValue()));
         int minZ = Integer.parseInt(String.valueOf(parameters.get("min_z").getValue()));
         int maxX = Integer.parseInt(String.valueOf(parameters.get("max_x").getValue()));
         int maxY = Integer.parseInt(String.valueOf(parameters.get("max_y").getValue()));
         int maxZ = Integer.parseInt(String.valueOf(parameters.get("max_z").getValue()));
-        return new Region(name, minX, minY, minZ, maxX, maxY, maxZ);
+        return new Region(name, dimension, minX, minY, minZ, maxX, maxY, maxZ);
     }
 
     @Override

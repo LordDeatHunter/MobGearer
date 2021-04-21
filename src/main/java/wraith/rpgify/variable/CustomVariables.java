@@ -2,7 +2,9 @@ package wraith.rpgify.variable;
 
 import org.yaml.snakeyaml.Yaml;
 import wraith.rpgify.Config;
+import wraith.rpgify.MobGroups;
 import wraith.rpgify.RPGify;
+import wraith.rpgify.entity.CustomEntities;
 
 import java.io.File;
 import java.util.HashMap;
@@ -17,8 +19,15 @@ public class CustomVariables {
 
     public static AbstractVariable get(String s) {
         String[] var = s.split("\\.");
-        if ("regions".equals(var[0])) {
-            return REGIONS.getOrDefault(var[1], null);
+        String varType = var[0];
+        if (var.length > 1) {
+            if ("regions".equals(varType)) {
+                return REGIONS.getOrDefault(var[1], null);
+            } else if ("entities".equals(varType)) {
+                return CustomEntities.getEntity(var[1]);
+            } else if ("mobs".equals(varType)) {
+                return new SetVariable(MobGroups.get(var[1]));
+            }
         }
         return VARIABLES.getOrDefault(s, null);
     }
@@ -51,4 +60,7 @@ public class CustomVariables {
         RPGify.LOGGER.info("Custom Regions have been loaded.");
     }
 
+    public static HashMap<String, Region> getRegions() {
+        return REGIONS;
+    }
 }

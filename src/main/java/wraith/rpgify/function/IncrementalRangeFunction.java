@@ -16,7 +16,7 @@ public class IncrementalRangeFunction extends RangeFunction {
             add("integer");
             add("float");
         }});
-        put("increment_chance", new HashSet<String>(){{
+        put("increment_amount", new HashSet<String>(){{
             add("integer");
             add("float");
         }});

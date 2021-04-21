@@ -16,19 +16,8 @@ public class PickRandomFunction extends Function {
     }};
     public static HashMap<String, HashSet<String>> optionalParameters = new HashMap<>();
 
-    private Object collection;
-
     public PickRandomFunction(String functionName, HashMap<String, AbstractVariable> parameters) {
         super(functionName, parameters);
-    }
-
-    public PickRandomFunction(String functionName, HashMap<String, AbstractVariable> parameters, Object collection) {
-        super(functionName, parameters);
-        this.collection = collection;
-    }
-
-    public void setCollection(Object collection) {
-        this.collection = collection;
     }
 
     public static Object pickRandom(Object collection) {
@@ -37,10 +26,16 @@ public class PickRandomFunction extends Function {
         }
         if (collection instanceof ArrayList) {
             ArrayList list = ((ArrayList)collection);
+            if (list.size() == 0) {
+                return null;
+            }
             return list.get(RangeFunction.getIntegerRange(0, list.size() - 1));
         }
         if (collection instanceof HashSet) {
             ArrayList list = new ArrayList((HashSet)collection);
+            if (list.size() == 0) {
+                return null;
+            }
             return list.get(RangeFunction.getIntegerRange(0, list.size() - 1));
         }
         return null;
@@ -48,7 +43,7 @@ public class PickRandomFunction extends Function {
 
     @Override
     public Object getValue() {
-        return pickRandom(this.collection);
+        return pickRandom(this.parameters.get("from").getValue());
     }
 
 }

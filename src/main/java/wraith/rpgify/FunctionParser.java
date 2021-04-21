@@ -49,8 +49,11 @@ public class FunctionParser {
         return functions;
     }
 
-    public static Function getFunction(String function) {
-        HashMap<String, AbstractVariable> parameters = new HashMap<>();
+    public static Function getFunction(String function, boolean override) {
+        return getFunction(function, new HashMap<>(), override);
+    }
+
+    public static Function getFunction(String function, HashMap<String, AbstractVariable> parameters, boolean override) {
         String functionName = null;
         String s = "";
         boolean isInFunction = false;
@@ -129,7 +132,7 @@ public class FunctionParser {
                 parameters.put(variable, AbstractVariable.of(s));
             }
         }
-        return Function.factory(functionName == null ? "" : functionName, parameters);
+        return Function.factory(functionName == null ? "" : functionName, parameters, override);
     }
 
 }
